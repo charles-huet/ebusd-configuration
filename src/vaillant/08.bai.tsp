@@ -353,7 +353,7 @@ namespace Bai {
     @condition(Scan.Id.product, "='0010043897'")
     Scan_Id_product_0010043897: Bai._0010043897_inc,
 
-    @condition(Scan.Id.product, "='0010024647'")
+    @condition(Scan.Id.product, "='0010024647'", "'0010025107'")
     Scan_Id_product_0010024647: Bai._0010024647_inc,
 
     @condition(Id.Id.hw, "=6701")

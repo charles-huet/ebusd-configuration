@@ -7,7 +7,7 @@ using Ebus.Str;
 namespace Vaillant;
 
 namespace Bai._0010024647_inc {
-  // ,BAI00,ecoTEC plus 0010024647 (HW 7603), based on 0010015600
+  // ,BAI00,ecoTEC plus 0010024647 and ThemaPlus Condens MA 26-CS/1 0010025107 (HW 7603), based on 0010015600
 
   /** default *w for user level "NOT_YET_CONFIRMED" */
   @write
