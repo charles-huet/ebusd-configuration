@@ -34,6 +34,73 @@ namespace Bai {
   // ,BAI00,generic file for all BAI types
   // fallbacks:
 
+  /** default *r for b511 status blocks */
+  @base(MF, 0x11)
+  model r_status {}
+
+  /** Status block 00 (layout from issue #249, checked on BAI00 SW1104 HW7603) */
+  @inherit(r_status)
+  @ext(0)
+  model Status00 {
+    /** flow temperature */
+    flowtemp: temp;
+
+    /** water pressure */
+    @divisor(10)
+    @unit("bar")
+    waterpressure: UCH;
+
+    /** fan speed */
+    @factor(64)
+    @unit("rpm")
+    fanspeed: UCH;
+
+    /** status code (S.xx) */
+    statuscode: UCH;
+
+    /** burner running (bits 1 and 2 are set with it) */
+    @values(Values_onoff)
+    burner: BI0;
+
+    /** pump running */
+    @values(Values_onoff)
+    pump: BI3;
+
+    /** diverter valve position */
+    @values(Values_diverter)
+    diverter: BI4;
+
+    unknown6: HEX;
+
+    /** heating released by the controller (SetMode disablehc) */
+    @values(Values_yesno)
+    hcrelease: BI0;
+
+    /** anti-cycling lock */
+    @values(Values_yesno)
+    anticycling: BI1;
+
+    /** hot water being drawn */
+    @values(Values_yesno)
+    hwcdemand: BI2;
+
+    /** hot water preheat released by the controller (SetMode disablehwcload; bit 7 follows it) */
+    @values(Values_yesno)
+    hwcloadrelease: BI3;
+
+    /** hot water preheat cycle running */
+    @values(Values_yesno)
+    hwcpreheat: BI4;
+
+    /** burner level (fan speed / 64 = 20 + 0.9 x level) */
+    burnerlevel: UCH;
+  }
+
+  enum Values_diverter {
+    heating: 0,
+    hotwater: 1,
+  }
+
   /** included parts */
   union _includes {
     @condition(Scan.Id.product, "='0010002315'", "'0010002316'", "'0010002317'")
